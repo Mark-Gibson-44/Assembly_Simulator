@@ -1,0 +1,3 @@
+add R01 2
+add R01 R01
+dec R12
