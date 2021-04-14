@@ -8,7 +8,7 @@ enum class Tokens {
 	Imm = 1,
 	Op = 2,
 	Addr = 3,
-
+	Labl = 4,
 	Eof = 100
 
 };

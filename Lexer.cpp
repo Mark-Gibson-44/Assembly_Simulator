@@ -9,7 +9,8 @@ const std::map<std::string, Tokens> regexes = {
 	{"^R[0-2][0-9]$", Tokens::Reg},
 	{"^[0-9]*$", Tokens::Imm},
 	{"^[a-z]{3}$", Tokens::Op},
-	{"^NOTHING$", Tokens::Addr}
+	{"^NOTHING$", Tokens::Addr},
+	{"^@[a-zA-z]*$", Tokens::Labl}
 
 };
 
