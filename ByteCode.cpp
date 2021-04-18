@@ -57,7 +57,11 @@ void VM::Interpreter(ParseNode* Tree)
 {
 	for (auto& operations : Tree->children)
 	{
-		
+		if (!operations->children.size())
+		{
+			labels.push_back(operations);
+			continue;
+		}
 		
 		
 		auto fun = ISA[operationMappings[operations->getLex()]];

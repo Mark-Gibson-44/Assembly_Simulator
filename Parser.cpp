@@ -55,7 +55,12 @@ void Parser::Expr()
 {
 	while (this->lookahead_pos < Lexed.size())
 	{
-		Op();//Currently every expressions begins with an OP
+		if (Lexed[current_pos].first == Tokens::Labl)
+		
+			match(Tokens::Labl);
+
+		else
+			Op();//Currently every expressions begins with an OP
 		//TODO implement Labels
 		
 	}

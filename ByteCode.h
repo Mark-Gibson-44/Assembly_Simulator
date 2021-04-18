@@ -36,7 +36,7 @@ class VM {
 	std::map<std::string, Register> registers; //Map of register names to Register Objects
 
 	std::map<Op__Codes, std::variant < ThreeAddress, TwoAddress>> ISA; //Map of opcodes to either a 3 address or two address func pointer
-	
+	std::vector<ParseNode*> labels;
 	void dumpReg();//Prints all register values
 
 	//Initializers

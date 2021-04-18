@@ -1,3 +1,4 @@
 add R01 2
+@labtest
 add R01 R01
 dec R12
