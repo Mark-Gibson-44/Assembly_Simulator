@@ -9,17 +9,17 @@
 
 namespace Instruction {
 
-	void mov(Register& dest, std::variant<Register, int> src);
-	void add(Register& dest, std::variant<Register, int> src);
-	void mul(Register& dest, std::variant<Register, int> src);
-	void sub(Register& dest, std::variant<Register, int> src);
-	void cmp(Register& dest, std::variant<Register, int> src);
-	void div(Register& dest, std::variant<Register, int> src);
-	void log_xor(Register& dest, std::variant<Register, int> src);
-	void log_or(Register& dest, std::variant<Register, int> src);
-	void log_and(Register& dest, std::variant<Register, int> src);
-	void inc(Register& dest);
-	void dec(Register& dest);
+	bool mov(Register& dest, std::variant<Register, int> src);
+	bool add(Register& dest, std::variant<Register, int> src);
+	bool mul(Register& dest, std::variant<Register, int> src);
+	bool sub(Register& dest, std::variant<Register, int> src);
+	bool cmp(Register& dest, std::variant<Register, int> src);
+	bool div(Register& dest, std::variant<Register, int> src);
+	bool log_xor(Register& dest, std::variant<Register, int> src);
+	bool log_or(Register& dest, std::variant<Register, int> src);
+	bool log_and(Register& dest, std::variant<Register, int> src);
+	bool inc(Register& dest);
+	bool dec(Register& dest);
 	
 
 	bool carry_set(int i);

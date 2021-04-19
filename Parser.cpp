@@ -81,6 +81,7 @@ void Parser::RHS()
 {
 	if (Lexed[current_pos].first == Tokens::Imm)
 		match(Tokens::Imm);
+	
 	else
 		match(Tokens::Reg);
 }

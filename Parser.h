@@ -45,7 +45,7 @@ class Parser {
 	//Recursive parsing functions
 	void Expr();
 	void Op();
-	void Label();
+	
 	void Reg_Reg();
 	void RHS();
 public:

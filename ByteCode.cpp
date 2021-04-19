@@ -46,6 +46,18 @@ void VM::initReg()
 	
 }
 
+ParseNode* VM::jump(std::string lab)
+{
+	std::cout << "JUMPING";
+	for(auto& label : labels)
+	{
+		if (!strcmp(label->getLex().c_str(), lab.c_str()))
+			return label;
+	}
+	//throw exception
+	return nullptr;
+}
+
 VM::VM()
 {
 	initISA();
@@ -66,22 +78,30 @@ void VM::Interpreter(ParseNode* Tree)
 		
 		auto fun = ISA[operationMappings[operations->getLex()]];
 		auto reg1 = operations->children[0]->getLex();
-		
+		bool flag_set;
 		if (operations->children.size() > 1)
 		{
 			
 			
 			auto reg2 = operations->children[1]->getLex();
+			
 			if(reg2[0] != 'R')
-				std::get<0>(fun)(registers[reg1], std::atoi(reg2.c_str()));
+				flag_set = std::get<0>(fun)(registers[reg1], std::atoi(reg2.c_str()));
 			else
-				std::get<0>(fun)(registers[reg1], registers[reg2]);
+				flag_set =std::get<0>(fun)(registers[reg1], registers[reg2]);
 		}
 		else
 		{
 			//execute with single address;
-			std::get<1>(fun)(registers[reg1]);
+			if (reg1[0] == '@')
+				operations = jump(reg1);
+			flag_set = std::get<1>(fun)(registers[reg1]);
 		}
+		if (flag_set)
+		{
+		 //jump somehow;
+		}
+
 	}
 	
 	dumpReg();

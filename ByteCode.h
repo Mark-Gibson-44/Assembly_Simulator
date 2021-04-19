@@ -9,8 +9,8 @@
 #include<vector>
 
 
-using ThreeAddress = void(*)(Register& l, std::variant<Register, int>);
-using TwoAddress = void(*)(Register& l);
+using ThreeAddress = bool(*)(Register& l, std::variant<Register, int>);
+using TwoAddress = bool(*)(Register& l);
 
 
 
@@ -47,6 +47,7 @@ class VM {
 	bool set_carry();
 	bool set_cmp();
 	bool set_interupt();
+	ParseNode* jump(std::string lab);
 public:
 	VM();
 	//Immediately after parsing generate instruction code and run it
