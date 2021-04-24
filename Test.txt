@@ -1,4 +1,6 @@
-add R01 2
-@labtest
-add R01 R01
-dec R12
+add R01 10
+@loop
+add R02 2
+dec R01
+jne R01 0
+@loop

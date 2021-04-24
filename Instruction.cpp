@@ -44,6 +44,54 @@ bool Instruction::sub(Register& dest, std::variant<Register, int> src)
 	return false;
 }
 
+bool Instruction::cmp(Register& dest, std::variant<Register, int> src)
+{
+	if (src.index() == 0)
+		return dest.getData() == std::get<0>(src).getData();
+	else
+		return dest.getData() == std::get<1>(src);
+}
+
+bool Instruction::jne(Register& dest, std::variant<Register, int> src)
+{
+	if (src.index() == 0)
+		return dest.getData() != std::get<0>(src).getData();
+	else
+		return dest.getData() != std::get<1>(src);
+}
+
+bool Instruction::jgt(Register& dest, std::variant<Register, int> src)
+{
+	if (src.index() == 0)
+		return dest.getData() < std::get<0>(src).getData();
+	else
+		return dest.getData() < std::get<1>(src);
+}
+
+bool Instruction::jge(Register& dest, std::variant<Register, int> src)
+{
+	if (src.index() == 0)
+		return dest.getData() <= std::get<0>(src).getData();
+	else
+		return dest.getData() <= std::get<1>(src);
+}
+
+bool Instruction::jlt(Register& dest, std::variant<Register, int> src)
+{
+	if (src.index() == 0)
+		return dest.getData() > std::get<0>(src).getData();
+	else
+		return dest.getData() > std::get<1>(src);
+}
+
+bool Instruction::jle(Register& dest, std::variant<Register, int> src)
+{
+	if (src.index() == 0)
+		return dest.getData() >= std::get<0>(src).getData();
+	else
+		return dest.getData() >= std::get<1>(src);
+}
+
 bool Instruction::div(Register& dest, std::variant<Register, int> src)
 {
 	if (src.index() == 0)

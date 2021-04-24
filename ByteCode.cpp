@@ -21,6 +21,12 @@ void VM::initISA()
 	ISA[Op__Codes::log_and] = Instruction::log_and;
 	ISA[Op__Codes::log_xor] = Instruction::log_xor;
 	ISA[Op__Codes::log_or] = Instruction::log_or;
+	ISA[Op__Codes::cmp] = Instruction::cmp;
+	ISA[Op__Codes::jne] = Instruction::jne;
+	ISA[Op__Codes::jge] = Instruction::jge;
+	ISA[Op__Codes::jle] = Instruction::jle;
+	ISA[Op__Codes::jlt] = Instruction::jlt;
+	ISA[Op__Codes::jgt] = Instruction::jgt;
 }
 
 void VM::initReg()
@@ -46,16 +52,12 @@ void VM::initReg()
 	
 }
 
-ParseNode* VM::jump(std::string lab)
+int VM::jump(std::string lab)
 {
-	std::cout << "JUMPING";
-	for(auto& label : labels)
-	{
-		if (!strcmp(label->getLex().c_str(), lab.c_str()))
-			return label;
-	}
+	return labels[lab];
+	
 	//throw exception
-	return nullptr;
+	
 }
 
 VM::VM()
@@ -67,18 +69,25 @@ VM::VM()
 
 void VM::Interpreter(ParseNode* Tree)
 {
-	for (auto& operations : Tree->children)
+	
+	for (int i = 0; i < Tree->children.size(); i++)
 	{
+		auto operations = Tree->children[i];
+		if (flag_set)
+		{
+			i = jump(operations->getLex());
+			flag_set = false;
+		}
 		if (!operations->children.size())
 		{
-			labels.push_back(operations);
+			labels[operations->getLex()] = i;
 			continue;
 		}
 		
 		
 		auto fun = ISA[operationMappings[operations->getLex()]];
 		auto reg1 = operations->children[0]->getLex();
-		bool flag_set;
+		
 		if (operations->children.size() > 1)
 		{
 			
@@ -93,16 +102,17 @@ void VM::Interpreter(ParseNode* Tree)
 		else
 		{
 			//execute with single address;
-			if (reg1[0] == '@')
-				operations = jump(reg1);
+			
 			flag_set = std::get<1>(fun)(registers[reg1]);
 		}
-		if (flag_set)
-		{
-		 //jump somehow;
-		}
+		
 
 	}
 	
 	dumpReg();
+}
+
+void VM::Interpreter(std::string compiled)
+{
+
 }

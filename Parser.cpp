@@ -55,13 +55,15 @@ void Parser::Expr()
 {
 	while (this->lookahead_pos < Lexed.size())
 	{
-		if (Lexed[current_pos].first == Tokens::Labl)
 		
+		if (Lexed[current_pos].first == Tokens::Labl)
+		{
 			match(Tokens::Labl);
-
-		else
+			
+		}
+		else {
 			Op();//Currently every expressions begins with an OP
-		//TODO implement Labels
+		}//TODO implement Labels
 		
 	}
 	
@@ -69,6 +71,8 @@ void Parser::Expr()
 
 void Parser::Op()
 {
+	
+
 	match(Tokens::Op);
 	Traversal = Traversal->children[Traversal->children.size() - 1];//Set Register and either Reg or Imm as children of Opp node
 	match(Tokens::Reg);

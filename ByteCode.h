@@ -36,18 +36,19 @@ class VM {
 	std::map<std::string, Register> registers; //Map of register names to Register Objects
 
 	std::map<Op__Codes, std::variant < ThreeAddress, TwoAddress>> ISA; //Map of opcodes to either a 3 address or two address func pointer
-	std::vector<ParseNode*> labels;
+	
+	std::map<std::string, int> labels;
 	void dumpReg();//Prints all register values
 
 	//Initializers
 	void initISA();
 	void initReg();
-	
+	bool flag_set;
 	//Flag functions TODO
 	bool set_carry();
 	bool set_cmp();
 	bool set_interupt();
-	ParseNode* jump(std::string lab);
+	int jump(std::string lab);
 public:
 	VM();
 	//Immediately after parsing generate instruction code and run it

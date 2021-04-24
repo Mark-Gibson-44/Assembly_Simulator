@@ -4,12 +4,19 @@
 
 void InstructionGen::Traverse(const char* out)
 {
-	std::fstream compiled;
+	std::ofstream compiled;
 	compiled.open(out);
 
 
 	for (auto& leaf : Iterator->children)
 	{
+		
+		if (!leaf->children.size())
+		{
+			compiled << leaf->getLex();
+			compiled << std::endl;
+			continue;
+		}
 		compiled << (int)operationMappings[leaf->getLex()];
 		compiled << leaf->children[0]->getLex();
 

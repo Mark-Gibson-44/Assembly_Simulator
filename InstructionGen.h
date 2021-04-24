@@ -15,7 +15,13 @@ enum class Op__Codes {
 	jmp = 0x08,
 	log_and = 0x09,
 	log_or = 0x10,
-	log_xor = 0x11
+	log_xor = 0x11,
+	jne = 0x12,
+	jlt = 0x13,
+	jle = 0x14,
+	jgt = 0x15,
+	jge = 0x16,
+	
 };
 
 //Map of strings to their corresponding enum values
@@ -31,6 +37,11 @@ static std::map<std::string, Op__Codes> operationMappings = {
 		{"or", Op__Codes::log_or},
 		{"and", Op__Codes::log_and},
 		{"xor", Op__Codes::log_xor},
+		{"jne", Op__Codes::jne},
+		{"jge", Op__Codes::jge},
+		{"jle", Op__Codes::jle},
+		{"jlt", Op__Codes::jlt},
+		{"jgt", Op__Codes::jgt}
 };
 
 class InstructionGen {
@@ -38,7 +49,8 @@ class InstructionGen {
 	ParseNode* Iterator;
 	
 	std::vector<int> out;
-
+	
+public:
 	InstructionGen(ParseNode* tree) : Tree(tree), Iterator(tree) {};
 
 	/*
@@ -46,6 +58,7 @@ class InstructionGen {
 	Instructions for later execution
 	*/
 	void Traverse(const char* out);
+	
 
 
 };
